@@ -21,8 +21,8 @@ services:
       - ./config/nginx/conf.d:/etc/nginx/conf.d:ro
     ports:
       - "80:80"
-    environment:
-      - "NGINX_HOST=${DOMAIN_NAME}"
+    # environment:
+    #   - DOMAIN_NAME=./config/.env.DOMAIN_NAME
     depends_on:
       - web
     networks:
