@@ -9,7 +9,8 @@
 version: "3.8"
 services:  
   nginx:
-    image: nginx:latest
+    container_name: nginx
+    build: ./docker/nginx/
     restart: unless-stopped
     env_file: ./config/.env
     volumes:
@@ -20,7 +21,6 @@ services:
       - ./config/nginx/conf.d:/etc/nginx/conf.d:ro
     ports:
       - "80:80"
-      - "443:443"
     depends_on:
       - web
     networks:
