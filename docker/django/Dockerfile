@@ -47,6 +47,7 @@ RUN apt-get update && apt-get upgrade -y \
     gettext \
     git \
     libpq-dev \
+    nginx \
   # Installing `dockerize` utility:
   # https://github.com/jwilder/dockerize
   && curl -sSLO "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz" \
@@ -75,9 +76,6 @@ RUN groupadd -g "${GID}" -r web \
   # Static and media files:
   && mkdir -p '/var/www/django/static' '/var/www/django/media' \
   && chown web:web '/var/www/django/static' '/var/www/django/media'\
-  && mkdir -p '/etc/nginx/' '/etc/nginx/templates' \
-  && chown web:web '/etc/nginx/' '/etc/nginx/templates'
-
 # Copy only requirements, to cache them in docker layer
 COPY --chown=web:web ./poetry.lock ./pyproject.toml /code/
 
