@@ -75,7 +75,7 @@ RUN groupadd -g "${GID}" -r web \
   && chown web:web -R '/code' \
   # Static and media files:
   && mkdir -p '/var/www/django/static' '/var/www/django/media' \
-  && chown web:web '/var/www/django/static' '/var/www/django/media'\
+  && chown web:web '/var/www/django/static' '/var/www/django/media'
 # Copy only requirements, to cache them in docker layer
 COPY --chown=web:web ./poetry.lock ./pyproject.toml /code/
 

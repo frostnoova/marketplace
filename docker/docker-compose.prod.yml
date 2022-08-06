@@ -9,7 +9,7 @@
 version: "3.8"
 services:  
   nginx:
-    image: nginx:1.21.4-alpine
+    image: nginx:latest
     restart: unless-stopped
     env_file: ./config/.env
     volumes:
@@ -17,8 +17,7 @@ services:
       - django-static:/var/www/django/static
       - django-media:/var/www/django/media
       # Nginx config
-      - ./docker/nginx/nginx.conf:/etc/nginx/sites-available/nginx.conf:ro
-      - ./docker/nginx/templates:/etc/nginx/sites-available/
+      - ./config/nginx/conf.d:/etc/nginx/conf.d:ro
     ports:
       - "80:80"
       - "443:443"
