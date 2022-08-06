@@ -21,17 +21,17 @@ services:
   web:
     <<: &web
       # Image name is changed in production:
-      image: "devel:dev"
+      container_name: "marketplace.devel"
       build:
         target: development_build
         context: .
         dockerfile: ./docker/django/Dockerfile
         args:
           DJANGO_ENV: development
-        cache_from:
-          - "devel:dev"
-          - "devel:latest"
-          - "*"
+        # cache_from:
+        #   - "devel:dev"
+        #   - "devel:latest"
+        #   - "*"
 
       volumes:
         - django-static:/var/www/django/static

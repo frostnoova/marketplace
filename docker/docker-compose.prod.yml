@@ -10,7 +10,7 @@ version: "3.8"
 services:  
   nginx:
     container_name: nginx
-    build: ./docker/nginx/
+    dockerfile: ./docker/nginx/Dockerfile
     restart: unless-stopped
     env_file: ./config/.env
     volumes:
@@ -21,6 +21,8 @@ services:
       - ./config/nginx/conf.d:/etc/nginx/conf.d:ro
     ports:
       - "80:80"
+    environment:
+      - "NGINX_HOST=${DOMAIN_NAME}"
     depends_on:
       - web
     networks:
@@ -28,7 +30,7 @@ services:
   web:
     <<: &web
       # Image for production:
-      image: "marketplace.services"
+      container_name: "marketplace.services"
       build:
         target: production_build
         args:
