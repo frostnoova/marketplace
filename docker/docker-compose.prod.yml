@@ -10,7 +10,7 @@ version: "3.8"
 services:  
   nginx:
     container_name: nginx
-    dockerfile: ./docker/nginx/Dockerfile
+    build: ./docker/nginx/Dockerfile
     restart: unless-stopped
     env_file: ./config/.env
     volumes:
