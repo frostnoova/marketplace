@@ -107,16 +107,3 @@ ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
 # https://wemake-django-template.readthedocs.io/en/latest/pages/template/production.html
 FROM development_build AS production_build
 COPY --chown=web:web . /code
-
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY my_nginx.conf /etc/nginx/sites-available/
-
-RUN mkdir -p /etc/nginx/sites-enabled/\
-    && ln -s /etc/nginx/sites-available/my_nginx.conf /etc/nginx/sites-enabled/
-
-# RUN mkdir -p /etc/nginx/sites-enabled/\
-#     && ln -s /etc/nginx/sites-available/my_nginx.conf /etc/nginx/sites-enabled/\
-#     && rm /etc/nginx/conf.d/default.conf
-RUN cat /etc/nginx/sites-available/my_nginx.conf
-
-CMD ["nginx", "-g", "daemon off;"]

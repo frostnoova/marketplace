@@ -29,7 +29,9 @@ services:
       - 8000
   nginx:
     container_name: nginx
-    build: ./docker/nginx/
+    build:
+      context: .
+      dockerfile: ./docker/docker/Dockerfile
     restart: unless-stopped
     env_file: ./config/.env
     volumes:
@@ -40,21 +42,13 @@ services:
       - ./config/nginx/conf.d:/etc/nginx/conf.d:ro
     ports:
       - "80:80"
+      - "433:433"
     depends_on:
       - web
     networks:
       - proxynet
 
-# This task is an example of how to extend existing ones:
-#   some_worker:
-#     <<: *web
-#     command: python manage.py worker_process
-#     deploy:
-#       replicas: 2
-
 networks:
-  # Network for your proxy server and application to connect them,
-  # do not use it for anything else!
   proxynet:
 
 volumes:
